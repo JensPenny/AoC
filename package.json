@@ -1,0 +1,15 @@
+{
+  "name": "advent2024",
+  "module": "src//index.ts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "input": "bun run src/utils/input.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

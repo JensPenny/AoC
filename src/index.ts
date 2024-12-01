@@ -1,0 +1,1 @@
+console.log('The index script is empty for this day, but should have a runner based on year + day');
