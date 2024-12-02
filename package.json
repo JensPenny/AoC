@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "input": "bun run src/utils/input.ts",
-    "day1": "bun run src/days/day1/day1.ts"
+    "day1": "bun run src/days/day1/day1.ts",
+    "day2": "bun run src/days/day2/day2.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
