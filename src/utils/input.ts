@@ -40,7 +40,7 @@ async function GetInput(year?: number, day?: number){
         }
 
         const input = await response.text();
-        Bun.write(inputFile, input);
+        Bun.write(inputFile, input.trim());
         console.log(`Downloaded and saved input for day ${day}`);
     }
 }
