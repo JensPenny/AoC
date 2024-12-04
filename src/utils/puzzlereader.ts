@@ -6,4 +6,4 @@ export const ReadPuzzle = (loc: string): Promise<string> => {
 export const toLines = (data: string) => data.split("\n");
 
 export const toMatrix = (data: string) =>
-    data.split("\n").map((line) => line.split(""));
+    toLines(data).map((line) => line.split(""));
