@@ -1,6 +1,5 @@
 import { describe, expect, test } from "bun:test";
 import { partA, partB } from "./day5";
-import { toMatrix } from "../../utils/puzzlereader";
 
 const testInput = `47|53
 97|13
@@ -37,8 +36,8 @@ describe("Day 5", () => {
         expect(result).toBe(143); 
     });
 
-    // test("Part B", () => {
-    //     const result = partB(testInput);
-    //     expect(result).toBe(101);
-    // })
+    test("Part B", () => {
+        const result = partB(testInput);
+        expect(result).toBe(123);
+    })
 });

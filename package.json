@@ -1,20 +1,22 @@
 {
   "name": "advent2024",
   "module": "src//index.ts",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/lodash": "^4.17.13",
+    "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
   "private": true,
-  "type": "module",
   "scripts": {
     "input": "bun run src/utils/input.ts",
     "day1": "bun run src/days/day1/day1.ts",
     "day2": "bun run src/days/day2/day2.ts",
-    "day3": "bun run src/days/day3/day3.ts", 
+    "day3": "bun run src/days/day3/day3.ts",
     "day4": "bun run src/days/day4/index.ts",
     "day5": "bun run src/days/day5/index.ts"
   },
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  }
+  "type": "module"
 }

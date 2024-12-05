@@ -8,7 +8,7 @@ function main() {
         .then(toMatrix)
         .then(partA)
         .then((data) => console.log("Day 4A: ", data));
-
+ 
     ReadPuzzle(join(__dirname, "input.txt"))
         .then(toMatrix)
         .then(partB)
