@@ -1,3 +1,5 @@
+import { createPoint, Directions, type Point } from "../../utils/point";
+
 function partA(input: string[][]): number {
     const toFind: string[] = ["X", "M", "A", "S"];
 
@@ -6,7 +8,7 @@ function partA(input: string[][]): number {
         const currentRow = input[row];
         for (let col = 0; col < currentRow.length; col++) {
             //process.stdout.write(input[row][col] + " ");
-            total += backtrack(input, new P(row, col), toFind, undefined);
+            total += backtrack(input, createPoint(row, col), toFind, undefined);
         }
         //process.stdout.write("\n");
     }
@@ -24,11 +26,11 @@ function partB(input: string[][]): number {
         const currentRow = input[row];
         for (let col = 0; col < currentRow.length; col++) {
             let correctCount = 0;
-            correctCount += backtrack(input, new P(row, col), toFind1, "SE");
-            correctCount +=backtrack(input, new P(row, col), toFind2, "SE");
+            correctCount += backtrack(input, createPoint(row, col), toFind1, "SE");
+            correctCount +=backtrack(input, createPoint(row, col), toFind2, "SE");
 
-            correctCount += backtrack(input, new P(row, col + 2), toFind1, "SW");
-            correctCount += backtrack(input, new P(row, col + 2), toFind2, "SW");
+            correctCount += backtrack(input, createPoint(row, col + 2), toFind1, "SW");
+            correctCount += backtrack(input, createPoint(row, col + 2), toFind2, "SW");
 
             if (correctCount == 2) {
                 // we found a correct track in the two points, so we found our solution
@@ -41,47 +43,6 @@ function partB(input: string[][]): number {
     }
     return total;
 }
-
-interface Point {
-    row: number;
-    col: number;
-    toDirection: (direction: string) => Point;
-}
-
-class P implements Point {
-    row: number;
-    col: number;
-
-    constructor(row: number, col: number) {
-        this.row = row;
-        this.col = col;
-    }
-
-    toDirection(direction: string): Point {
-        switch (direction) {
-            case "N":
-                return new P(this.row - 1, this.col);
-            case "NE":
-                return new P(this.row - 1, this.col + 1);
-            case "E":
-                return new P(this.row, this.col + 1);
-            case "SE":
-                return new P(this.row + 1, this.col + 1);
-            case "S":
-                return new P(this.row + 1, this.col);
-            case "SW":
-                return new P(this.row + 1, this.col - 1);
-            case "W":
-                return new P(this.row, this.col - 1);
-            case "NW":
-                return new P(this.row - 1, this.col - 1);
-            default:
-                break;
-        }
-        return new P(this.row, this.col);
-    }
-}
-const Directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"] as const;
 
 function backtrack(
     input: string[][],
