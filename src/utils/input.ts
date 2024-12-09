@@ -10,11 +10,16 @@ function GetInputToday(){
     GetInput();
 }
 
-async function GetInput(year?: number, day?: number){
+async function GetInput(yearstr?: string, daystr?: string){
+    let year: number | undefined;
+    let day: number | undefined;
+
+    year = yearstr ? Number(year) : undefined;
+    day = daystr ? Number(day) : undefined;
     if (!year || !day){
         let now = new Date();
         year = now.getFullYear();
-        day = now.getDay() + 1;
+        day = now.getDate();
         console.log(`No input variables found for day and year. Filling in ${day} and ${year}`);
     }
 
