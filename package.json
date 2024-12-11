@@ -20,7 +20,8 @@
     "day6": "bun run src/days/day6/index.ts",
     "day7": "bun run src/days/day7/index.ts",
     "day8": "bun run src/days/day8/index.ts",
-    "day9": "bun run src/days/day9/index.ts"
+    "day9": "bun run src/days/day9/index.ts",
+    "day10": "bun run src/days/day10/index.ts"
   },
   "type": "module"
 }

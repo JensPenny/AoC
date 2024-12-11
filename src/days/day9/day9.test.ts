@@ -1,6 +1,5 @@
 import { describe, test, expect } from "bun:test";
 import { partA, partB } from "./day9";
-import { toLines, toMatrix } from "../../utils/puzzlereader";
 
 const testInput = `23331331214141314022`;
 
