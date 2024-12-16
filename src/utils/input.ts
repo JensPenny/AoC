@@ -16,6 +16,7 @@ async function GetInput(yearstr?: string, daystr?: string){
 
     year = yearstr ? Number(year) : undefined;
     day = daystr ? Number(day) : undefined;
+
     if (!year || !day){
         let now = new Date();
         year = now.getFullYear();
