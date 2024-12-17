@@ -18,3 +18,7 @@ export const printMatrix = (input: string[][]) => {
         stdout.writer().write("\n");
     }
 };
+
+export const matrixToString = (input: string[][]): string => {
+    return input.map(arr => arr.join("")).join('\n');
+}
