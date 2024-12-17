@@ -114,9 +114,12 @@ async function partB(input: string, width: number, height: number): number {
 
     // Lets do this smart. We're going to assume that the tree gets printed in the middle.
     // So we do the whole part1 shebang, and see if Q1 == Q2 and Q3 == Q4
-    for (let sec = 1; sec < 100000; sec++) {
+    // Change of plans, if somewhere inside there is a picture of a concentrated set of points, one of the quadrants is hopefully nearly empty?
+
+    let threshold = 50;
+    for (let sec = 1; sec < 10000; sec++) {
         let result = new Map<number, number>();
-        vectors = vectors.map(v => moveVectorInGrid(v, width, height, 1));
+        vectors = vectors.map((v) => moveVectorInGrid(v, width, height, 1));
         // vectors = vectors.map(
         //     (v) => <Vector>{ pos: v.pos.Add(v.vel), vel: v.vel }
         // );
@@ -126,15 +129,24 @@ async function partB(input: string, width: number, height: number): number {
             result.set(q, (result.get(q) || 0) + 1);
         }
 
-        if (result.get(1) == result.get(2) && result.get(3) == result.get(4)) {
+        let newmin = Math.min(
+            result.get(1)!,
+            result.get(2)!,
+            result.get(3)!,
+            result.get(4)!
+        );
+        // if (result.get(1) == result.get(2) && result.get(3) == result.get(4)) {
+        if (newmin < threshold) {
+            //min = newmin;
             let copy = baseField.map(function (arr) {
                 return arr.slice();
             });
             vectors.forEach((ve) => (copy[ve.pos.y][ve.pos.x] = "X"));
             let mtrxString = matrixToString(copy);
+            //8050 with the breaks under the threshold
             console.log(mtrxString);
-            console.log(`seconds: ${sec}`)
-            await sleep(1000);
+            console.log(`seconds: ${sec}`);
+            //await sleep(1000);
             //return sec;
         }
     }
