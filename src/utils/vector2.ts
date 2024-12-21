@@ -43,6 +43,11 @@ class Vector2 implements Vector {
         }
         return this;
     }
+
+    // Equals implementation
+    Is(other: Vector2): boolean{
+        return other.x === this.x && other.y === this.y;
+    }
 }
 
 export { Vector2 };

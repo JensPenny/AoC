@@ -4,25 +4,96 @@ import { Vector2 } from "../../utils/vector2";
 
 function partA(input: string): number {
     let puzzle = parseInput(input);
+    let agent = puzzle.agent;
+    let grid = puzzle.field;
 
-    for (let move of puzzle.moves){
+    for (let move of puzzle.moves) {
+        let dir: Direction | null = null;
+        switch (move) {
+            case ">":
+                dir = "E";
+                break;
+            case "<":
+                dir = "W";
+                break;
+            case "^":
+                dir = "N";
+                break;
+            case "v":
+                dir = "S";
+                break;
+            default:
+                console.log(`no direction found! ${move}`);
+                continue;
+        }
 
+        let nextPosition = agent.toDirection(dir!);
+        // Quickcheck - if the next position is an open position, we just move there without issue
+        if (grid[nextPosition.y][nextPosition.x] === ".") {
+            // update the grid
+            grid[nextPosition.y][nextPosition.x] = "@";
+            grid[agent.y][agent.x] = ".";
+            // update the position pointer
+            agent = nextPosition;
+        } else {
+            let nextOpen = getFirstOpen(grid, nextPosition, dir!);
+            if (nextOpen === null) {
+                // We hit a wall with no empty spaces, do nothing
+                continue;
+            } else {
+                // update the grid
+                grid[nextPosition.y][nextPosition.x] = "@";
+                grid[agent.y][agent.x] = ".";
+                grid[nextOpen.y][nextOpen.x] = "O";
+                agent = nextPosition;
+            }
+        }
     }
-    return 0;
+
+    console.log(`final grid state`);
+    printMatrix(grid);
+    let score = calculateGridScore(grid);
+    return score;
 }
 
 // Get the first open location in a direction
-// We return this first open direction 
-function getFirstOpen(grid: string[][], currentPosition: Vector2, direction: Direction): Vector2 | null {
-    if (grid[currentPosition.y][currentPosition.x] === '.') {
-       return currentPosition; 
+// We return this first open direction
+function getFirstOpen(
+    grid: string[][],
+    currentPosition: Vector2,
+    direction: Direction
+): Vector2 | null {
+    let checkPosition = currentPosition;
+
+    while (grid[checkPosition.y][checkPosition.x] !== "#") {
+        if (grid[checkPosition.y][checkPosition.x] === ".") {
+            console.log(`empty at ${(checkPosition.x + "-" + checkPosition.y)}`);
+            return checkPosition;
+        } else if (grid[checkPosition.y][checkPosition.x] === "O") {
+            console.log(`box at ${(checkPosition.x + "-" + checkPosition.y)}`);
+            checkPosition = checkPosition.toDirection(direction);
+        }
     }
 
+    console.log(`wall at ${(checkPosition.x, checkPosition.y)}`);
     return null;
 }
 
 function partB(input: string): number {
     return 0;
+}
+
+function calculateGridScore(grid: string[][]): number {
+    let result = 0;
+    grid.forEach((row, ri) => {
+        row.forEach((col, ci) => {
+            if (col === "O") {
+                let pointScore = 100 * ri + ci;
+                result = result + pointScore;
+            }
+        });
+    });
+    return result;
 }
 
 function parseInput(input: string): Puzzle {

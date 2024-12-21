@@ -25,7 +25,8 @@
     "day11": "bun run src/days/day11/index.ts",
     "day12": "bun run src/days/day12/index.ts",
     "day13": "bun run src/days/day13/index.ts",
-    "day14": "bun run src/days/day14/index.ts"
+    "day14": "bun run src/days/day14/index.ts",
+    "day15": "bun run src/days/day15/index.ts"
   },
   "type": "module"
 }
